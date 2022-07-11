@@ -17,3 +17,19 @@
 - Testing: Integration tests are trickier
 - Latency
 - Data Consistency: Achieving ACID properties requires a new set of challenges (e.g. *Sagas*)
+## Chaopter 2: How to Model Microservices
+In essence, microservices are just another form of modular decomposition. There are three main factors that decides whether a microservice is well tailored:
+- Information Hiding
+- Cohesion
+- Coupling
+### Information Hiding
+Information hiding describes a desire to hide as many details as possible behind a module boundary.
+Benefits:
+- Improved development time: Having modules implies parallel work without friction
+- Comprehensibility: Each module can be looked at in isolation and understood in isolation.
+- Flexibility: Modules can be changed independently of one another.
+
+From Parnas' Information Distribution Aspects: *The connections between modules are the assumptions which the modules make about each other*.
+
+By reducing the number of assumptions that one module makes about another, we directly impact the connections between them. By keeping
+the number of assumptions small, it's easier to ensure that we can change one module without impacting the others.
