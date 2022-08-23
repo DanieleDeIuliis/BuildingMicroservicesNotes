@@ -57,4 +57,22 @@ Two or more microservices make use of a common set of data. The key point here i
 An upstream service reaches into the internals of a downstream service and changes its internal state.
 
 It's more subtle than *Common Coupling* because the resource has not been devised to be shared, making the system harder to change.
+## Chapter 3: Splitting the monolith
+*Microservices aren't easy. Try the simple stuff first*
+### Increment migration
+*If you do a big bang rewrite, the only thing you're guaranteed of is a big bang. - Martin Fowler*
 
+An incremental approach will help you lear about microservices as you go and will also limit the impact of getting something wrong. Choose one or two areas of functionality, implement them as microservice, get them deployed into production, and then reflect on whether creating your new micreservices helped you get closer to your end goal.
+### Useful Decompositional Patterns
+#### Strangler Fig Patter
+This pattern is used to wrap the old system with the new one over time, allowing the new system to take over more and more features of the old system incrementally. 
+
+A possible implementation is to put a proxy/interceptor that forwards to the new system the extracted functionality. The beauty of it is that the old system isn't involved at all.
+#### Parallel Run
+Run both the old and new system side by side, serving the same requests and compare the results.
+#### Feature Toggle
+A simple switch to turn on or off a functionality. Combined with Strangler pattern, it could be used in the HTTP proxy to switch between the old and the new implementation.
+### Data Decomposition Concerns
+- Performance: relational databases are good at joining data across tables. However, with a distributed database the latency increases.
+- Data Integrity: being distributed, relationships such as foreign keys are not ensured anymore. The service should take care of it
+- Transactions: No more ACID transactions. *Sagas?*
