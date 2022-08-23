@@ -33,3 +33,28 @@ From Parnas' Information Distribution Aspects: *The connections between modules 
 
 By reducing the number of assumptions that one module makes about another, we directly impact the connections between them. By keeping
 the number of assumptions small, it's easier to ensure that we can change one module without impacting the others.
+### Cohesion
+*The code that changes together stays together.*
+
+We need to find boundaries within our problem domain that help ensure related behaviour is in one place and that communicate with other boundaries as loosely as possible.
+### Coupling
+*A change in one part of system shouldn't require another change elsewhere.* 
+
+When services are loosely coupled, a chage to one service shoul not require a change to another.
+
+**A structure is stasble if cohesion is strong and coupling is low**
+### Types of Coupling
+#### Domain Coupling
+One microservice needs to interact with another microservice, because the first microservice needs to make use of the functionality that the other microservice provides.
+This type of interaction is largely unavoidable, but we still want to keep this to a minimum. A microservice that speaks with too many microservices it might be one that is doing too much.
+#### Pass-Through Coupling 
+One microservice passes data to another microservice purely because the data is needed by some other microservice further downstream.
+
+It's one of the most problematic form of coupling because it implies that microservices know internalities of other microservices.
+#### Common Coupling
+Two or more microservices make use of a common set of data. The key point here is that the services know that they're using a shared resource.
+#### Content Coupling
+An upstream service reaches into the internals of a downstream service and changes its internal state.
+
+It's more subtle than *Common Coupling* because the resource has not been devised to be shared, making the system harder to change.
+
